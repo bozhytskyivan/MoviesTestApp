@@ -19,9 +19,6 @@ import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
-    public static final String MOVIE_MODEL = "movie_model";
-    public static final String IMAGE_BASE_PATH = "http://image.tmdb.org/t/p/w300";
-
     private List<MovieModel> mMovies;
     private Context mContext;
 
@@ -54,22 +51,19 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
         ImageView moviePoster;
-        TextView movieTitle;
         MovieModel movieModel;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(onMovieSelected);
             moviePoster = (ImageView) itemView.findViewById(R.id.movie_image_view);
-            movieTitle = (TextView) itemView.findViewById(R.id.movie_title_text_view);
         }
 
         public void setData(MovieModel movie) {
             movieModel = movie;
             Picasso.with(mContext)
-                    .load(IMAGE_BASE_PATH + movie.getPosterUrl())
+                    .load(Constants.IMAGE_BASE_PATH + movie.getPosterUrl())
                     .into(moviePoster);
-            movieTitle.setText(movie.getTitle());
         }
 
         View.OnClickListener onMovieSelected = new View.OnClickListener() {
@@ -77,7 +71,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             public void onClick(View v) {
                 DetailsFragment detailsFragment = new DetailsFragment();
                 Bundle bundle = new Bundle();
-                bundle.putParcelable(MOVIE_MODEL, movieModel);
+                bundle.putParcelable(Constants.MOVIE_MODEL, movieModel);
                 detailsFragment.setArguments(bundle);
                 ((MainActivity) mContext).switchFragment(detailsFragment);
             }

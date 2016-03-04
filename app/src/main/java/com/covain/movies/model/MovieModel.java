@@ -16,16 +16,18 @@ public class MovieModel implements Parcelable {
     @SerializedName("overview")
     private String overview;
     @SerializedName("vote_count")
-    private int votesCount;
-
+    private String votesCount;
     @SerializedName("vote_average")
-    private double votes_Average;
+    private String votes_Average;
 
     protected MovieModel(Parcel in) {
         title = in.readString();
         posterUrl = in.readString();
+        rating = in.readString();
+        overview = in.readString();
+        votesCount = in.readString();
+        votes_Average = in.readString();
     }
-
 
     public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
         @Override
@@ -50,8 +52,8 @@ public class MovieModel implements Parcelable {
         dest.writeString(posterUrl);
         dest.writeString(rating);
         dest.writeString(overview);
-        dest.writeInt(votesCount);
-        dest.writeDouble(votes_Average);
+        dest.writeString(votesCount);
+        dest.writeString(votes_Average);
     }
 
     public String getTitle() {
@@ -71,7 +73,7 @@ public class MovieModel implements Parcelable {
     }
 
     public String getRating() {
-        return rating;
+        return "Rating: " + rating;
     }
 
     public void setRating(String rating) {
@@ -86,19 +88,19 @@ public class MovieModel implements Parcelable {
         this.overview = overview;
     }
 
-    public int getVotesCount() {
-        return votesCount;
+    public String getVotesCount() {
+        return "Votes: " + votesCount;
     }
 
-    public void setVotesCount(int votesCount) {
+    public void setVotesCount(String votesCount) {
         this.votesCount = votesCount;
     }
 
-    public double getVotes_Average() {
-        return votes_Average;
+    public String getVotes_Average() {
+        return "Votes average: " + votes_Average;
     }
 
-    public void setVotes_Average(double votes_Average) {
+    public void setVotes_Average(String votes_Average) {
         this.votes_Average = votes_Average;
     }
 }

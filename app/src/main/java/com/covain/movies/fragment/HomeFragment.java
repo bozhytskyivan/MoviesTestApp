@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.covain.movies.Constants;
 import com.covain.movies.MoviesAdapter;
 import com.covain.movies.model.MoviesResponse;
 import com.covain.movies.movies.R;
@@ -23,10 +24,6 @@ import retrofit.Retrofit;
 import retrofit.http.POST;
 
 public class HomeFragment extends BaseFragment {
-
-    public static final String MOVIES_TYPE = "top_rated";
-    public static final String API_KEY = "455acc9448fcf189d6bd4bf63d5bce97";
-    public static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
 
     @Bind(R.id.movies_list_view)
     RecyclerView mMoviesListView;
@@ -48,7 +45,7 @@ public class HomeFragment extends BaseFragment {
         mMoviesListView.setAdapter(mMoviesAdapter);
 
         mRetrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         mNetworkService = mRetrofit.create(NetworkService.class);
@@ -67,8 +64,6 @@ public class HomeFragment extends BaseFragment {
         public void onResponse(Response<MoviesResponse> response, Retrofit retrofit) {
             mMoviesAdapter.setData(response.body().getMovies());
             mMainActivity.hideLoading();
-            Toast.makeText(mMainActivity, "Loading finished. " + response.body().getMovies().size() + " movies loaded", Toast.LENGTH_LONG)
-                    .show();
         }
 
         @Override
@@ -79,7 +74,7 @@ public class HomeFragment extends BaseFragment {
     };
 
     public interface NetworkService {
-        @POST(MOVIES_TYPE + "?api_key=" + API_KEY)
+        @POST("top_rated?api_key=" + Constants.API_KEY)
         Call<MoviesResponse> getMovies();
     }
 }

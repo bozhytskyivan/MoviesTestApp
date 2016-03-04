@@ -13,4 +13,15 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
+    <!-- Main text style-->
+    <style name="MainTextStyle">
+        <item name="android:layout_marginLeft">@dimen/middle_margin</item>
+        <item name="android:layout_marginStart">@dimen/middle_margin</item>
+        <item name="android:layout_marginRight">@dimen/little_margin</item>
+        <item name="android:layout_marginEnd">@dimen/little_margin</item>
+        <item name="android:layout_marginTop">@dimen/small_margin</item>
+        <item name="android:layout_marginBottom">@dimen/small_margin</item>
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>
